@@ -12,9 +12,24 @@ app.get('/example', (req, res) =>{
 
 //json = JavaScript Object Notation
 app.get('/products', (req, res) =>{
+  res.json([
+    {
+      name: 'product 1',
+      price: 200
+    },
+    {
+      name: 'product 2',
+      price: 300
+    }
+  ])
+});
+
+app.get('/products/:productID', (req, res) => {
+  const { productID } = req.params;
   res.json({
-    name: 'product 1',
-    price: 200
+    productID,
+    name: 'product 2',
+    price: 300
   })
 });
 
@@ -53,6 +68,17 @@ app.get('/categories', (req, res) => {
     },
   })
 });
+
+app.get('/categories/:categoryID/products/:productID', (req, res) => {
+  const { categoryID, productID } = req.params;
+
+  res.json({
+    categoryID,
+    productID
+  });
+
+});
+
 
 app.listen(port, () => {
   console.log('Servidor corriendo en el puerto ' + port);
