@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const { faker } = require('@faker-js/faker');
 
 app.get('/', (req, res) => {
   res.send('Hola, mi primer server con express');
@@ -11,19 +12,29 @@ app.get('/example', (req, res) =>{
 })
 
 //json = JavaScript Object Notation
+//http://localhost:3000/products?size=2
 app.get('/products', (req, res) =>{
-  res.json([
-    {
-      name: 'product 1',
-      price: 200
-    },
-    {
-      name: 'product 2',
-      price: 300
-    }
-  ])
+
+  const products = [];
+  const { size } = req.query;
+  const limit = size || 10;
+
+  for (let index = 0; index < limit; index++) {
+   products.push({
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.avatar(),
+   })
+
+  }
+  res.json(products)
 });
 
+app.get('/products/filter', (req, res) => {
+  res.send('Yo soy un filter');
+});
+
+//Los endpoints especificos deben declararsen antes de los endpoints dinamicos.
 app.get('/products/:productID', (req, res) => {
   const { productID } = req.params;
   res.json({
@@ -134,6 +145,22 @@ app.get('/characters/:id', (req, res) => {
     name: 'Gohan',
     power: '45.000.000'
   });
+
+})
+
+//GET: Query Params
+//http://localhost:3000/users?limit=1&offset=2
+app.get('/users', (req, res) => {
+  const { limit, offset } = req.query;
+
+  if(limit && offset) {
+    res.json({
+      limit,
+      offset
+    });
+  } else {
+    res.send('No hay parametros');
+  }
 
 })
 
