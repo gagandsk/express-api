@@ -4,6 +4,7 @@ const routerApi = require('./routes');
 const app = express();
 const port = 3000;
 
+app.use(express.json()); //middleware que nos permite recibir datos por el metodo 'post'
 routerApi(app);
 
 app.get('/', (req, res) => {
