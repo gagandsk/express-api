@@ -71,14 +71,71 @@ app.get('/categories', (req, res) => {
 
 app.get('/categories/:categoryID/products/:productID', (req, res) => {
   const { categoryID, productID } = req.params;
-
   res.json({
     categoryID,
     productID
   });
-
 });
 
+app.get('/tasks/:id', (req, res) => {
+
+  const { id } = req.params;
+  res.json([
+    {
+      id: id,
+      name: 'create',
+      type: 'something'
+    },
+    {
+      id: id,
+      name: 'read',
+      type: 'something'
+    },
+    {
+      id: id,
+      name: 'update',
+      type: 'something'
+    },
+    {
+      id: id,
+      name: 'delete',
+      type: 'something'
+    }
+  ])
+});
+
+app.get('/characters', (req, res) => {
+  res.json([
+    {
+      name: 'goku',
+      power: '60.000.000'
+    },
+    {
+      name: 'vegeta',
+      power: '54.000.000'
+    },
+    {
+      name: 'Piccolo',
+      power: '2.000.000'
+    },
+    {
+      name: 'Gohan',
+      power: '45.000.000'
+    }
+  ])
+});
+
+app.get('/characters/:id', (req, res) => {
+
+  const { id } = req.params;
+
+  res.json({
+    id,
+    name: 'Gohan',
+    power: '45.000.000'
+  });
+
+})
 
 app.listen(port, () => {
   console.log('Servidor corriendo en el puerto ' + port);
