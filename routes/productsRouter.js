@@ -29,16 +29,27 @@ router.get('/filter', (req, res) => {
 //Los endpoints especificos deben declararsen antes de los endpoints dinamicos.
 router.get('/:productID', (req, res) => {
   const { productID } = req.params;
-  res.json({
-    productID,
-    name: 'product 2',
-    price: 300
-  })
+
+  if(productID === '999') {
+    res.status(404).json({
+      message:'not found'
+    });
+
+  } else {
+
+    res.status(200).json({
+      productID,
+      name: 'product 2',
+      price: 300
+    });
+
+  }
+
 });
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body
   })
