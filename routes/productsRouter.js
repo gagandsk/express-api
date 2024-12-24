@@ -16,10 +16,15 @@ router.get('/filter', (req, res) => {
 });
 
 //Los endpoints especificos deben declararsen antes de los endpoints dinamicos.
-router.get('/:productID', async (req, res) => {
-  const { productID } = req.params;
-  const product = await service.findOne(productID);
-  res.json(product);
+router.get('/:productID', async (req, res, next) => {
+  try {
+    const { productID } = req.params;
+    const product = await service.findOne(productID);
+    res.json(product);
+  } catch(error) {
+    next(error);
+  }
+
 });
 
 router.post('/', async (req, res) => {
