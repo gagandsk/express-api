@@ -15,10 +15,8 @@ class ProductsService {
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.avatar(),
-    })
-
+      })
     }
-
   }
 
   async create(data){
@@ -32,9 +30,9 @@ class ProductsService {
 
   find(){
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
+      //setTimeout(() => {
         resolve(this.products)
-      }, 5000)
+      //}, 5000)
     });
   }
 
