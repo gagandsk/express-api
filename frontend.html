@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: 2vh auto;
+      text-align: center;
+      font-family: arial;
+      padding: 20px;
+    }
+    .card img {
+      width: 100px;
+    }
+    .price {
+      color: grey;
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Products</h1>
+  <div class="container" id="container"></div>
+
+  <script>
+    (async () => {
+      const products = await fetch('http://localhost:3000/api/v1/products/');
+      const data = await products.json();
+
+      let htmlContent = '';
+
+      data.forEach(product => {
+        if (!product.isBlock) {
+          htmlContent += `
+            <div id="${product.id}" class="card">
+              <img src="${product.image}" alt="${product.id}">
+              <h4>${product.name}</h4>
+              <p class="price">${product.price}</p>
+            </div>
+          `;
+        }
+      });
+
+      const container = document.getElementById('container');
+      container.innerHTML = htmlContent;
+
+    })();
+  </script>
+</body>
+</html>
