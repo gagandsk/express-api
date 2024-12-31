@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    h1{
+      text-align: center;
+    }
     .container{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -40,9 +43,9 @@
 
       data.forEach(product => {
         if (!product.isBlock) {
+          //<img src="${product.image}" alt="${product.id}">
           htmlContent += `
             <div id="${product.id}" class="card">
-              <img src="${product.image}" alt="${product.id}">
               <h4>${product.name}</h4>
               <p class="price">${product.price}</p>
             </div>
