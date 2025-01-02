@@ -24,4 +24,4 @@ const getUserSchema = Joi.object({
   id: id.required(),
 });
 
-modules.exports = { createUserSchema, updateUserSchema, getUserSchema };
+module.exports = { createUserSchema, updateUserSchema, getUserSchema };
